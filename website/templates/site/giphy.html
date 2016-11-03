@@ -1,2 +1,9 @@
 {% load static %}
+
 <link rel="stylesheet" type="text/css" href="{% static 'site/style.css' %}" />
+
+{% for giphy in Giphy_Urls %}
+
+ <img src = "{{giphy}}" class = "giphy">
+
+{% endfor %}

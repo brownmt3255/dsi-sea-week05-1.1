@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from .models import Question
+from .models import Question, Hits
 
 class IndexView(generic.ListView):
     template_name = 'site/index.html'
@@ -43,3 +43,24 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('site:results', args=(question.id,)))
+
+def giphy(request, giphy_search):
+    #Query giphy api here
+    # Loading JSON Dictionary via API
+    url = urllib2.urlopen('http://api.giphy.com/v1/gifs/search?q=' + giphy_search + '&api_key=dc6zaTOxFJmzC').read()
+    JSON_Giphy = json.loads(url)
+    Giphy_Urls = []
+
+    # Make list of giph URLs
+    for x in JSON_Giphy['data']:
+        Giphy_Urls.append(x['images']['fixed_height']['url'])
+
+    hit, created = Hits.objects.get_or_create(name = giphy_search, defaults = {'name': giphy_search, 'hits': 1})
+    if not created:
+        hit.hits += 1
+        hit.save()
+
+    return render(request, 'site/giphy.html', {'Giphy_Urls': Giphy_Urls})
+
+def tally(request):
+    return render(request, 'site/tally.html', {'hits': Hits.objects.all()})

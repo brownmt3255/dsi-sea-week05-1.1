@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'classproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'rvnpopiq',
+        'HOST': 'elmer-02.db.elephantsql.com',
+        'USER': 'rvnpopiq',
+        'PASSWORD': '7tXUX6AjXtFTrNWX8oJwgqMlbEZHdPHQ',
+        'PORT': '5432'
     }
 }
 
