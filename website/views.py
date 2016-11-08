@@ -6,6 +6,8 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 from .models import Question, Hits
 
