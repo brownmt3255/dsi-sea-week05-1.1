@@ -22,7 +22,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','halo-5-dashboard.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','fast-bayou-19648.herokuapp.com']
 
 # Application definition
 
