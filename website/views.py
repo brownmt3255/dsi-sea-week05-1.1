@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+
 from .models import Question, Hits
 
 class IndexView(generic.ListView):
@@ -64,3 +65,13 @@ def giphy(request, giphy_search):
 
 def tally(request):
     return render(request, 'site/tally.html', {'hits': Hits.objects.all()})
+
+def grades(request):
+    scope = ['https://spreadsheets.google.com/feeds']
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('General Aseembly-7928b44819f8.json', scope)
+    gc = gspread.authorize(credentials)
+    grades = gc.open_by_url('https://docs.google.com/spreadsheets/d/1prfIEcE6mf7QbMyi-O9kgXyuQLYKlezqmGF2NTNNn9s/edit#gid=0')
+    brad = grades.get_worksheet(0).get_all_values()
+    qq = grades.get_worksheet(1).get_all_values()
+
+    return render(request, 'site/grades.html', {'brad': brad, 'qq': qq})
