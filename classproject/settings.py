@@ -27,7 +27,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =['0.0.0.0','127.0.0.1','halo-5-dashboard.herokuapp.com']
+ALLOWED_HOSTS =['0.0.0.0','127.0.0.1','git.heroku.com/fast-falls-58132.git']
 
 # Application definition
 
