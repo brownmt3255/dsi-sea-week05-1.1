@@ -16,8 +16,10 @@ import os
 SECRET_KEY = '28!ivzrmvw+i@@iogodd3m%@7-nqg$o!n=@73+bt-zqay4e-c5'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -25,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS =['0.0.0.0','127.0.0.1','peaceful-badlands-42479.herokuapp.com']
 
 # Application definition
 
@@ -73,7 +75,7 @@ WSGI_APPLICATION = 'classproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'rvnpopiq',
@@ -82,7 +84,23 @@ DATABASES = {
         'PASSWORD': '7tXUX6AjXtFTrNWX8oJwgqMlbEZHdPHQ',
         'PORT': '5432'
     }
+}'''
+
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DATABASE_NAME', ''),
+        'HOST': os.environ.get('DATABASE_HOST', ''),
+        'USER': os.environ.get('DATABASE_USER', ''),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
+        'PORT': os.environ.get('DATABASE_PORT', ''),
+    }
 }
+
+
+
 
 
 # Password validation
